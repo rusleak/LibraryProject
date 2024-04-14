@@ -22,6 +22,7 @@ import java.util.Objects;
 /**
  * @author Neil Alishev
  */
+//sss
 @Configuration
 @ComponentScan("mainPackage")
 @EnableWebMvc

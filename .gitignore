@@ -1,24 +1,35 @@
-# Compiled class file
-*.class
+# Ignore Maven build files
+target/
 
-# Log file
+# Ignore IntelliJ IDEA local configuration files
+.idea/
+
+# Ignore JPABuddy files
+.jpb/
+
+# Ignore files created by IntelliJ IDEA
+*.iml
+*.iws
+*.ipr
+.idea/
+
+# Ignore IntelliJ IDEA user settings files
+.idea_modules/
+*.iml
+*.iws
+*.ipr
+*.ids
+*.orig
+*.classpath
+*.project
+*.settings/
+
+# Ignore temporary files
+*~
+*.swp
 *.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+*.bak
+src/main/resources/DB.properties
+# Ignore Gradle build files (if using Gradle)
+# build/
+# .gradle/

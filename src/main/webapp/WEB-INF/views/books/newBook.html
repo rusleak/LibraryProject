@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Book</title>
+</head>
+<body>
+<div class="container">
+    <h1>Create New Book</h1>
+    <form id="bookForm" action="/books/new" method="post">
+        <label for="bookName">Book Name:</label>
+        <input type="text" id="bookName" name="bookName">
+        <div id="bookNameError" class="error-message"></div>
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author">
+        <div id="authorError" class="error-message"></div>
+        <label for="year">Year of Posting:</label>
+        <input type="text" id="year" name="year">
+        <div id="yearError" class="error-message"></div>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+<script>
+    document.getElementById('bookForm').addEventListener('submit', function(event) {
+        var bookName = document.getElementById('bookName').value;
+        var author = document.getElementById('author').value;
+        var year = document.getElementById('year').value;
+
+        var bookNameError = document.getElementById('bookNameError');
+        var authorError = document.getElementById('authorError');
+        var yearError = document.getElementById('yearError');
+
+        bookNameError.textContent = '';
+        authorError.textContent = '';
+        yearError.textContent = '';
+
+        if (!bookName) {
+            bookNameError.textContent = 'Book Name is required.';
+            event.preventDefault();
+        }
+
+        if (!author) {
+            authorError.textContent = 'Author is required.';
+            event.preventDefault();
+        }
+
+        if (!year) {
+            yearError.textContent = 'Year is required.';
+            event.preventDefault();
+        } else if (parseInt(year) < 1800) {
+            yearError.textContent = 'Year must be greater than or equal to 1800.';
+            event.preventDefault();
+        }
+    });
+</script>
+
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0; /* Убираем отступы по умолчанию */
+    }
+    .container {
+        text-align: center;
+    }
+    form {
+        width: 300px; /* Ширина формы */
+        padding: 20px; /* Отступы вокруг формы */
+        border: 1px solid #ccc; /* Рамка формы */
+        border-radius: 5px; /* Скругляем углы формы */
+        display: inline-block; /* Делаем форму блочным элементом */
+        text-align: left; /* Выравниваем текст в форме слева */
+    }
+    h1 {
+        margin-bottom: 20px; /* Добавляем отступ снизу для заголовка */
+    }
+    label {
+        display: block; /* Каждая метка на новой строке */
+        margin-bottom: 10px; /* Добавляем отступ снизу для меток полей */
+    }
+    input {
+        margin-bottom: 15px; /* Добавляем отступ снизу для полей ввода */
+        width: 100%; /* Растягиваем поля ввода на всю ширину */
+    }
+    input[type="submit"] {
+        width: auto; /* Оставляем кнопку шириной по содержимому */
+    }
+    .error-message {
+        color: red;
+        font-size: 12px;
+        margin-top: 5px;
+    }
+</style>
+</body>
+</html>

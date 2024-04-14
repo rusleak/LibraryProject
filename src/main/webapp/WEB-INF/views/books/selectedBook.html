@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Selected Book</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+        }
+        form {
+            margin-top: 10px;
+        }
+        .button {
+            display: inline-block;
+            margin: 5px;
+            padding: 10px 20px;
+            background-color: #f0f0f0;
+            color: black;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none; /* Убираем подчеркивание текста в кнопке */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Book Information</h2>
+    <p><strong>ID:</strong> <span th:text="${selectedBook.id}"></span></p>
+    <p><strong>Title:</strong> <span th:text="${selectedBook.bookName}"></span></p>
+    <p><strong>Author:</strong> <span th:text="${selectedBook.author}"></span></p>
+    <p><strong>Year:</strong> <span th:text="${selectedBook.year}"></span></p>
+
+    <!-- Вывод информации о владельце книги -->
+    <p th:if="${personOwner}">Owned by: <span th:text="${personOwner.fullName}"></span></p>
+
+    <!-- Кнопка для редактирования книги -->
+    <form th:action="@{'/books/' + ${selectedBook.id} + '/update'}" method="get">
+        <button class="button" type="submit">Edit</button>
+    </form>
+
+    <!-- Кнопка для назначения владельца книги -->
+    <form th:action="@{'/books/' + ${selectedBook.id} + '/assign-book'}" method="get">
+        <button class="button" type="submit">Assign Owner</button>
+    </form>
+
+    <!-- Форма для удаления книги -->
+    <form th:action="@{'/books/' + ${selectedBook.id} + '/delete'}" method="post">
+        <input type="submit" value="Delete"/>
+    </form>
+
+    <!-- Вывод предупреждения, если книга уже занята -->
+    <div th:if="${param.error}">
+        <p style="color: red" th:text="${param.error}"></p>
+    </div>
+
+    <!-- Форма для освобождения книги -->
+    <form th:action="@{'/books/' + ${selectedBook.id} + '/freeSelectedBook'}" method="post">
+        <button class="button" type="submit">Free this book</button>
+    </form>
+</div>
+
+</body>
+</html>

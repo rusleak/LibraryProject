@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All people</title>
+    <style>
+        body {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .person-link {
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div th:each="person : ${AllPeople}">
+    <a class="person-link" th:href="@{/people/{id}(id=${person.id})}" th:text="${person.fullName + ', ' + person.dateOfBirth}"></a>
+</div>
+
+<br/>
+<hr/>
+<a href="/people/new">Create new person</a>
+
+</body>
+</html>

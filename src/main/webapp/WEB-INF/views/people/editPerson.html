@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Person</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            text-align: center;
+            margin-top: 20px;
+        }
+        form {
+            display: inline-block;
+            text-align: left;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<h1>Edit Person</h1>
+<form id="editForm" th:action="@{/people/{id}/edit(id=${person.id})}" method="post" th:object="${person}">
+
+
+    <label for="fullName">Full Name:</label><br>
+    <input type="text" id="fullName" name="fullName" th:value="${person.fullName}"><br>
+    <span class="error" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></span><br>
+    <label for="dateOfBirth">Date of Birth:</label><br>
+    <input type="text" id="dateOfBirth" name="dateOfBirth" th:value="${person.dateOfBirth}"><br>
+    <span class="error" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></span><br><br>
+    <input type="submit" value="Update">
+</form>
+
+
+</body>
+</html>

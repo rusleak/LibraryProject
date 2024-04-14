@@ -1,0 +1,35 @@
+<div style="text-align: center; margin-top: 20px;">
+    <!-- Информация о человеке -->
+    <div style="margin-bottom: 20px;">
+        <h2>Person Details</h2>
+        <p><strong>Name:</strong> <span th:text="${onePersonShow.fullName}"></span></p>
+        <p><strong>Date of Birth:</strong> <span th:text="${onePersonShow.dateOfBirth}"></span></p>
+        <p><strong>ID:</strong> <span th:text="${onePersonShow.id}"></span></p>
+    </div>
+
+    <!-- Кнопка для редактирования данных человека -->
+    <div style="margin-bottom: 20px;">
+        <form th:action="@{'/people/' + ${onePersonShow.id} + '/edit'}">
+            <button type="submit" class="btn btn-primary">Edit</button>
+        </form>
+    </div>
+
+    <!-- Форма для удаления данных человека -->
+    <div style="margin-bottom: 20px;">
+        <form th:action="@{'/people/' + ${onePersonShow.id} + '/delete'}" method="post">
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+
+    <!-- Проверка наличия взятых книг -->
+    <div>
+        <h3>Taken Books</h3>
+        <ul th:if="${not takenBooks.empty}" class="list-group">
+            <li th:each="book : ${takenBooks}" class="list-group-item">
+                <span><span th:text="${book.bookName}"></span> by <span th:text="${book.author}"></span></span>
+            </li>
+        </ul>
+        <!-- Если нет взятых книг, отобразить сообщение -->
+        <p th:if="${takenBooks.empty}" class="text-muted">This person has not taken any books yet</p>
+    </div>
+</div>

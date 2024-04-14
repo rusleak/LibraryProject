@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        form {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- assignBookForm.html -->
+<form th:action="@{'/books/' + ${bookId} + '/assign-book'}" method="post">
+    <select name="personId">
+        <option value="">Book for person...</option>
+        <th:block th:each="person : ${allPersons}">
+            <option th:value="${person.id}" th:text="${person.fullName}"></option>
+        </th:block>
+    </select>
+    <!-- Добавьте скрытое поле для передачи bookId -->
+    <input type="hidden" name="bookId" th:value="${bookId}"/>
+    <input type="submit" value="Submit"/>
+</form>
+
+</body>
+</html>

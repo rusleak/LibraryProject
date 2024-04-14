@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Book</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0; /* Убираем отступы по умолчанию */
+        }
+        .container {
+            width: 300px; /* Ширина контейнера */
+        }
+        form {
+            width: 100%; /* Ширина формы равна ширине контейнера */
+            padding: 20px; /* Отступы вокруг формы */
+            border: 1px solid #ccc; /* Рамка формы */
+            border-radius: 5px; /* Скругляем углы формы */
+            text-align: center; /* Выравниваем текст в форме по центру */
+        }
+        h2 {
+            text-align: center; /* Выравниваем заголовок по центру */
+            margin-bottom: 20px; /* Добавляем отступ снизу для заголовка */
+        }
+        label {
+            display: block; /* Каждая метка на новой строке */
+            margin-bottom: 10px; /* Добавляем отступ снизу для меток полей */
+        }
+        input {
+            margin-bottom: 15px; /* Добавляем отступ снизу для полей ввода */
+            width: 100%; /* Растягиваем поля ввода на всю ширину */
+        }
+        input[type="submit"] {
+            width: auto; /* Оставляем кнопку шириной по содержимому */
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Edit Book</h2>
+
+    <form id="bookForm" method="post">
+
+        <label for="bookName">Title:</label><br>
+        <input type="text" id="bookName" name="bookName" value=""><br>
+        <div id="bookNameError" class="error-message"></div>
+        <label for="author">Author:</label><br>
+        <input type="text" id="author" name="author" value=""><br>
+        <div id="authorError" class="error-message"></div>
+        <label for="year">Year:</label><br>
+        <input type="text" id="year" name="year" value=""><br>
+        <div id="yearError" class="error-message"></div>
+        <input type="hidden" id="selectedBookId" name="selectedBookId" value="${selectedBook.id}">
+        <br>
+        <input type="submit" value="Save Changes">
+    </form>
+</div>
+
+<script>
+    document.getElementById('bookForm').addEventListener('submit', function(event) {
+        var bookName = document.getElementById('bookName').value;
+        var author = document.getElementById('author').value;
+        var year = document.getElementById('year').value;
+
+        var bookNameError = document.getElementById('bookNameError');
+        var authorError = document.getElementById('authorError');
+        var yearError = document.getElementById('yearError');
+
+        bookNameError.textContent = '';
+        authorError.textContent = '';
+        yearError.textContent = '';
+
+        if (!bookName) {
+            bookNameError.textContent = 'Title is required.';
+            event.preventDefault();
+        }
+
+        if (!author) {
+            authorError.textContent = 'Author is required.';
+            event.preventDefault();
+        }
+
+        if (!year) {
+            yearError.textContent = 'Year is required.';
+            event.preventDefault();
+        } else if (isNaN(year) || parseInt(year) < 1800) {
+            yearError.textContent = 'Year must be a number greater than or equal to 1800.';
+            event.preventDefault();
+        }
+    });
+</script>
+
+
+</body>
+</html>
